@@ -23,6 +23,15 @@ pip install -r requirements.txt
 Download pre-trained weights [here](https://drive.google.com/drive/folders/1FE28rAh88YuCtu8LZ7Zh_yY_yYcJ5hRP?usp=sharing)
 
 ## Detection
+The detection has two stages. We first use YOLO to quickly
+select possible regions of detects, and then use two ResNet scanners to examine
+the proposed regions. If no YOLO result is given, the scanners will examine
+every pixel in the image (but may take much longer time).
+
+0. Normalize input data set. This can be done by setting ```mean``` and 
+    ```std``` in ```utils.py```. Set ```mean``` to 0 and ```std``` to 1 
+    if the input data set is already normalized.
+    
 1. To specify input images, create a .csv file with one column.
 In the given example, ```img_paths.csv``` consists of two image paths:
     ```csv
