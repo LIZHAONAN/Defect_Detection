@@ -8,10 +8,6 @@ import numpy as np
 
 from Yolo_v3.yolo_utils import *
 
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-
-
 def create_modules(module_defs):
     """
     Constructs module list of layer blocks from module configuration in module_defs
