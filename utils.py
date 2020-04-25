@@ -197,6 +197,6 @@ def visualize_pts(image_path, pts):
 def pts_from_df(df, path):
     df_img = df[df['path'] == path]
     # df_img = df_img.drop(columns=['path'])
-    df_img['y'] = 1 - df_img['y']
+    # df_img['y'] = 1 - df_img['y']
     df_img = df_img[['class', 'x', 'y']]
     return df_img.values
