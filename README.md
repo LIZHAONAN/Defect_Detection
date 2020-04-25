@@ -4,8 +4,8 @@ Pipeline for positive and negative defect detection in active nematics.
 This repository includes code for training (currently unfinished), 
 detection and visualization.
 
-<img src="temp/defects_confined.jpg" style="float: left; width: 400px;">
-<img src="temp/defects_unconfined.jpg" style="float: right; width: 400px;">
+<img src="temp/defects_confined.jpg" style="float: left; width: 300px;">
+<img src="temp/defects_unconfined.jpg" style="float: left; width: 300px;">
 
 Improvements from previous implementation:
 - Support for multiple GPUs and CPU
