@@ -23,7 +23,7 @@ pip install -r requirements.txt
 Download pre-trained weights [here](https://drive.google.com/drive/folders/1FE28rAh88YuCtu8LZ7Zh_yY_yYcJ5hRP?usp=sharing)
 
 ## Detection
-1. To specify input images, create a .csv file with one row.
+1. To specify input images, create a .csv file with one column.
 In the given example, ```img_paths.csv``` consists of two image paths:
     ```csv
     path
