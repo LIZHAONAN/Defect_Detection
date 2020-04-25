@@ -1,12 +1,9 @@
 from __future__ import division
-import math
-import time
+
 import tqdm
 import torch
 import torchvision.transforms as transforms
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 from PIL import Image
 
 
