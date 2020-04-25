@@ -82,23 +82,25 @@ if __name__ == '__main__':
         boxes = boxes_from_df(df_yolo, path)
 
         img_res = slide_on_image(img, model_hard, model_uniform, model_int, boxes, batch_size=opt.batch_size)
+        res = np.transpose(img_res, (1, 2, 0))
 
-        pos = peak_local_max(img_res[0, :, :], min_distance=15, threshold_abs=0.983, threshold_rel=0.9).astype(np.float)
-        pos_o = peak_local_max(img_res[2, :, :], min_distance=12, threshold_abs=0.97, threshold_rel=0.9).astype(np.float)
-        neg = peak_local_max(img_res[1, :, :], min_distance=8, threshold_abs=0.988, threshold_rel=0.9).astype(np.float)
+        pos = peak_local_max(res[:, :, 0], min_distance=15, threshold_abs=0.983, threshold_rel=0.9).astype(np.float)
+        pos_o = peak_local_max(res[:, :, 2], min_distance=12, threshold_abs=0.97, threshold_rel=0.9).astype(np.float)
+        neg = peak_local_max(res[:, :, 1], min_distance=8, threshold_abs=0.988, threshold_rel=0.9).astype(np.float)
 
-        # merge pos and pos open
+        # merge pos and "pos open"
         pos = np.vstack((pos, pos_o))
         pos = np.array([[0, x / w, y / h] for x, y in pos])
         neg = np.array([[1, x / w, y / h] for x, y in neg])
 
         time_used = time.time() - since
+        print('-- total {} positive defects and {} negative defects detected'.format(len(pos), len(neg)))
         print('-- finished {} in {:.0f}m {:.0f}s'.format(row['path'], time_used//60, time_used % 60))
 
         df_img = pd.DataFrame(np.vstack((pos, neg)), columns=['class', 'x', 'y'])
         df_img['path'] = path
 
-        df_img_res = df_img_res.append(df_img)
+        df_img_res = df_img_res.append(df_img, sort=True)
 
         df_img_res.to_csv(opt.output, sep=',', index=None)
         print('-- defect result stored at {}'.format(opt.output))
