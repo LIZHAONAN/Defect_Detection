@@ -88,10 +88,22 @@ if __name__ == '__main__':
         pos_o = peak_local_max(res[:, :, 2], min_distance=12, threshold_abs=0.97, threshold_rel=0.9).astype(np.float)
         neg = peak_local_max(res[:, :, 1], min_distance=8, threshold_abs=0.988, threshold_rel=0.9).astype(np.float)
 
+        if pos.size == 0:
+            pos = np.array([]).reshape(0, 2)
+        if pos_o.size == 0:
+            pos_o = np.array([]).reshape(0, 2)
+        if neg.size == 0:
+            neg = np.array([]).reshape(0, 2)
+
         # merge pos and "pos open"
         pos = np.vstack((pos, pos_o))
         pos = np.array([[0, x / w, y / h] for x, y in pos])
         neg = np.array([[1, x / w, y / h] for x, y in neg])
+
+        if pos.size == 0:
+            pos = np.array([]).reshape(0, 3)
+        if neg.size == 0:
+            neg = np.array([]).reshape(0, 3)
 
         time_used = time.time() - since
         print('-- total {} positive defects and {} negative defects detected'.format(len(pos), len(neg)))
