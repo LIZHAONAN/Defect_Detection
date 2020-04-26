@@ -101,6 +101,7 @@ def slide_on_image(img, model_hard, model_uniform, model_int, boxes, stride=2, b
         print('-- {} bounding boxes found, window slide on boxes'.format(len(boxes)))
         for box in boxes:
             x1, y1, x2, y2 = box
+            x1, y1, x2, y2 = max(0, x1), max(0, y1), min(w, x2), min(h, y2)
             x1, x2 = [int(i * w) for i in [x1, x2]]
             y1, y2 = [int(i * h) for i in [y1, y2]]
 
